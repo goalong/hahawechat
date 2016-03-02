@@ -4,6 +4,7 @@ import hashlib
 import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
+app.debug=True
 
 @app.route('/wechat', methods=['GET', 'POST'])
 def wechat_auth():
