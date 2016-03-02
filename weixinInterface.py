@@ -27,15 +27,12 @@ class WeixinInterface:
             #自己的token
             token="test"
             #字典序排序
-            list=[token,timestamp,nonce]
-            list.sort()
-            sha1=hashlib.sha1()
-            map(sha1.update,list)
-            hashcode=sha1.hexdigest()
-            #sha1加密算法        
+            l=[token,timestamp,nonce]
+            l.sort()
+            s = l[0] + l[1] + l[2]
      
             #如果是来自微信的请求，则回复echostr
-            if hashcode == signature:
+            if hashlib.sha1(s).hexdigest() == signature:
                 return 'verify'
         return 'not verify'
 
