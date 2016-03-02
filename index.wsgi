@@ -7,7 +7,7 @@ import web
 from weixinInterface import WeixinInterface
  
 urls = (
-'/weixin','WeixinInterface'
+'/wechat','WeixinInterface'
 )
  
 app_root = os.path.dirname(__file__)
