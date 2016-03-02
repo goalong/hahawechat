@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 import hashlib
 import web
 import time
@@ -16,7 +16,7 @@ class WeixinInterface:
         self.render = web.template.render(self.templates_root)
  
     def GET(self):
-        #获取输入参数
+
         data = web.input()
         if len(data) >= 2:
             # pdb.set_trace()
@@ -24,14 +24,14 @@ class WeixinInterface:
             timestamp=data.get(timestamp)
             nonce=data.get(nonce)
             echostr=data.get(echostr)
-            #自己的token
+
             token="test"
-            #字典序排序
+
             l=[token,timestamp,nonce]
             l.sort()
             s = l[0] + l[1] + l[2]
      
-            #如果是来自微信的请求，则回复echostr
+
             if hashlib.sha1(s).hexdigest() == signature:
                 return 'verify'
         return 'not verify'
