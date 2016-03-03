@@ -43,7 +43,7 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
+        return self.render.reply_text(fromUser,toUser,int(time.time()),content)
 
 
 if __name__ == "__main__":
