@@ -64,11 +64,9 @@ class WechatAuth():
         pass
     def POST(self):
         pass
-class AskAuth():
+class Auth():
     def GET(self):
         data = web.input()
-        # print data
-        # pdb.set_trace()
         code = data.code
         url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
                 APPID=APPID, SECRET=APPSECRET, CODE=code)

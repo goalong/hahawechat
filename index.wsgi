@@ -4,11 +4,11 @@ import os
 import sae
 import web
  
-from wechat import Wechat, AskAuth
+from wechat import Wechat, Auth
  
 urls = (
 '/wechat','Wechat',
-'/auth', 'AskAuth'
+'/auth', 'Auth'
 )
  
 app_root = os.path.dirname(__file__)
