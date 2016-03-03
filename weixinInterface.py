@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 import hashlib
 import web
@@ -5,6 +6,7 @@ import time
 import os
 import urllib2,json
 import pdb
+from lxml import etree
 
 urls = ('/wechat', 'WeixinInterface')
 
@@ -33,6 +35,16 @@ class WeixinInterface:
                 return echostr
         # pdb.set_trace()
         return data
+
+    def POST(self):        
+        str_xml = web.data() #获得post来的数据
+        xml = etree.fromstring(str_xml)#进行XML解析
+        content=xml.find("Content").text#获得用户所输入的内容
+        msgType=xml.find("MsgType").text
+        fromUser=xml.find("FromUserName").text
+        toUser=xml.find("ToUserName").text
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
+
 
 if __name__ == "__main__":
     app = web.application(urls, globals())
