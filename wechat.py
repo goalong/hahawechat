@@ -8,6 +8,11 @@ import urllib2,json
 from lxml import etree
 
 urls = ('/wechat', 'Wechat')
+APPID = ''
+APPSECRET = ''
+scope = 'snsapi_userinfo'
+
+
 
 class Wechat:
  
@@ -43,6 +48,15 @@ class Wechat:
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
         return self.render.reply_text(fromUser,toUser,int(time.time()),u'我知道你说的是{content}, 但我还不确定回复你什么呢。Not Sure Yet.'.format(content=content))
+
+class WechatAuth():
+    def GET(self):
+        pass
+    def POST(self):
+        pass
+class AskAuth():
+    def GET(self):
+        return self.render.auth('test')
 
 
 if __name__ == "__main__":
