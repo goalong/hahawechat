@@ -4,10 +4,10 @@ import os
 import sae
 import web
  
-from weixinInterface import WeixinInterface
+from wechat import Wechat
  
 urls = (
-'/wechat','WeixinInterface'
+'/wechat','Wechat'
 )
  
 app_root = os.path.dirname(__file__)

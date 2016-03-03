@@ -5,7 +5,6 @@ import web
 import time
 import os
 import urllib2,json
-import pdb
 from lxml import etree
 
 urls = ('/wechat', 'WeixinInterface')
