@@ -66,7 +66,7 @@ class WechatAuth():
 class AskAuth():
     def GET(self):
         data = web.input()
-        return data
+        return render.auth(data)
     def POST(self):
         pass
 
