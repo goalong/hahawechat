@@ -6,14 +6,20 @@ import time
 import os
 import urllib2,json
 from lxml import etree
+from urllib import urlopen
 
 urls = (
     '/wechat', 'Wechat',
     '/auth', 'AskAuth'
     )
-APPID = ''
-APPSECRET = ''
-scope = 'snsapi_userinfo'
+APPID = 'wx25fa28a3f4439fe2'
+APPSECRET = '1443a06f8c87f0f7889cc898d516f588'
+SCOPE = 'snsapi_userinfo'
+REDIRECT_URI = urlopen('http://hahawechat.applinzi.com/auth')
+URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid={APPID}&redirect_uri={REDIRECT_URI}&response_type=code&scope={SCOPE}&state=STATE#wechat_redirect'.format(
+            APPID=APPID, REDIRECT_URI=REDIRECT_URI, SCOPE=SCOPE)
+print URL
+
 
 render = web.template.render('templates')
 
@@ -60,8 +66,10 @@ class WechatAuth():
 class AskAuth():
     def GET(self):
         return render.auth('test')
+    def POST(self):
 
 
-if __name__ == "__main__":
-    app = web.application(urls, globals())
-    app.run()
+
+# if __name__ == "__main__":
+#     app = web.application(urls, globals())
+#     app.run()
