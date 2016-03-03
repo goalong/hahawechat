@@ -78,7 +78,7 @@ class AskAuth():
         openid = content['openid']
         url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
         userinfo = json.loads(urllib2.urlopen(url2).read())
-        return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'])
+        return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'], userinfo['province'])
     def POST(self):
         pass
 
