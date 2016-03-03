@@ -43,7 +43,7 @@ class WeixinInterface:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        return self.render.reply_text(fromUser,toUser,int(time.time()),content)
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u'我知道你说的是{content}, 但我还不确定回复你什么呢。Not Sure Yet.'.format(content=content))
 
 
 if __name__ == "__main__":
