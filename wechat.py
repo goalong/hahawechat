@@ -7,12 +7,15 @@ import os
 import urllib2,json
 from lxml import etree
 
-urls = ('/wechat', 'Wechat')
+urls = (
+    '/wechat', 'Wechat',
+    '/auth', 'AskAuth'
+    )
 APPID = ''
 APPSECRET = ''
 scope = 'snsapi_userinfo'
 
-
+render = web.template.render('templates')
 
 class Wechat:
  
@@ -56,7 +59,7 @@ class WechatAuth():
         pass
 class AskAuth():
     def GET(self):
-        return self.render.auth('test')
+        return render.auth('test')
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import web
 from wechat import Wechat, AskAuth
  
 urls = (
-'/wechat','Wechat'
+'/wechat','Wechat',
 '/auth', 'AskAuth'
 )
  
