@@ -7,9 +7,9 @@ import os
 import urllib2,json
 from lxml import etree
 
-urls = ('/wechat', 'WeixinInterface')
+urls = ('/wechat', 'Wechat')
 
-class WeixinInterface:
+class Wechat:
  
     def __init__(self):
         self.app_root = os.path.dirname(__file__)
