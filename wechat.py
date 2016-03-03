@@ -7,6 +7,8 @@ import os
 import urllib2,json
 from lxml import etree
 from urllib import urlencode
+import json
+import pdb
 
 urls = (
     '/wechat', 'Wechat',
@@ -18,7 +20,6 @@ SCOPE = 'snsapi_userinfo'
 REDIRECT_URI = 'http://hahawechat.applinzi.com/auth'
 URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid={APPID}&redirect_uri={REDIRECT_URI}&response_type=code&scope={SCOPE}&state=STATE#wechat_redirect'.format(
             APPID=APPID, REDIRECT_URI=REDIRECT_URI, SCOPE=SCOPE)
-print URL
 
 
 render = web.template.render('templates')
@@ -66,11 +67,22 @@ class WechatAuth():
 class AskAuth():
     def GET(self):
         data = web.input()
-        return render.auth(data)
+        # print data
+        # pdb.set_trace()
+        code = data.code
+        url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
+                APPID=APPID, SECRET=APPSECRET, CODE=code)
+        content = urllib2.urlopen(url).read()
+        content = json.loads(content)
+        access_token = content['access_token']
+        openid = content['openid']
+        url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
+        userinfo = json.loads(urllib2.urlopen(url2).read())
+        return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'])
     def POST(self):
         pass
 
 
-# if __name__ == "__main__":
-#     app = web.application(urls, globals())
-#     app.run()
+if __name__ == "__main__":
+    app = web.application(urls, globals())
+    app.run()
