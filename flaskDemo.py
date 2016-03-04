@@ -2,7 +2,7 @@
 
 import time
 # from flask import Flask, request, make_response
-from bottle import Bottle
+from bottle import Bottle, request, response
 import hashlib
 import xml.etree.ElementTree as ET
 from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
@@ -19,7 +19,7 @@ app.debug=True
 def wechat_verify():
     if request.method == 'GET':
         token = 'test'  
-        query = request.args
+        query = request.query
         signature = query.get('signature', '')
         timestamp = query.get('timestamp', '')
         nonce = query.get('nonce', '')
@@ -47,7 +47,7 @@ def wechat_verify():
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'GET':
-        code = request.args.get('code', '')
+        code = request.query.get('code', '')
         # userinfo = get_userinfo(code)
         url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
                     APPID=APPID, SECRET=APPSECRET, CODE=code)
