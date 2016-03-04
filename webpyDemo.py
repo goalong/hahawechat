@@ -8,21 +8,13 @@ import urllib2,json
 from lxml import etree
 from urllib import urlencode
 import json
+from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
 import pdb
 
 urls = (
     '/wechat', 'Wechat',
     '/auth', 'AskAuth'
     )
-APPID = 'wx25fa28a3f4439fe2'
-APPSECRET = '1443a06f8c87f0f7889cc898d516f588'
-SCOPE = 'snsapi_userinfo'
-REDIRECT_URI = 'http://hahawechat.applinzi.com/auth'
-URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid={APPID} \
-            &redirect_uri={REDIRECT_URI}&response_type=code&scope={SCOPE}&state=STATE#wechat_redirect'.format(
-            APPID=APPID, REDIRECT_URI=REDIRECT_URI, SCOPE=SCOPE)
-
-
 render = web.template.render('templates')
 
 class Wechat:
@@ -40,8 +32,7 @@ class Wechat:
         echostr=data.get('echostr')
         token="test"    
 
-        if len(data) >= 2 and signature and timestamp and nonce:
-            
+        if len(data) >= 2 and signature and timestamp and nonce: 
             l=[token,timestamp,nonce]
             l.sort()
             s = l[0] + l[1] + l[2]

@@ -1,13 +1,16 @@
 # encoding: utf-8
+
 import time
 from flask import Flask, request, make_response
 import hashlib
 import xml.etree.ElementTree as ET
+from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
+import urllib2
 import pdb
 
 app = Flask(__name__)
 app.debug=True
-
+# 服务器验证
 @app.route('/wechat', methods=['GET', 'POST'])
 def wechat_verify():
     if request.method == 'GET':
@@ -24,7 +27,7 @@ def wechat_verify():
             return echostr
         return u'验证失败'
     else:
-        xml_recv = ET.fromstring(request.data)
+        xml_recv = ET.fromstring(request.data)    #XML数据存储在request.data中
         ToUserName = xml_recv.find("ToUserName").text
         FromUserName = xml_recv.find("FromUserName").text
         Content = xml_recv.find("Content").text
@@ -36,6 +39,24 @@ def wechat_verify():
                                           str(int(time.time())), Content))
         response.content_type = 'application/xml'
         return response
+# 网页授权
+@app.route('/auth', methods=['GET', 'POST'])
+def auth():
+    data = request.args
+    code = data.get('code', '')
+    url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
+            APPID=APPID, SECRET=APPSECRET, CODE=code)
+    content = urllib2.urlopen(url).read()
+    content = json.loads(content)
+    access_token = content['access_token']
+    openid = content['openid']
+    url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
+    userinfo = json.loads(urllib2.urlopen(url2).read())
+    return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'], userinfo['province'])
+
+
+
+
 
 if __name__ == '__main__':
     app.run()
