@@ -46,12 +46,13 @@ def wechat_verify():
 def auth():
     if request.method == 'GET':
         code = request.args.get('code', '')
-        # userinfo = get_userinfo(code)
-        url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
-                    APPID=APPID, SECRET=APPSECRET, CODE=code)
-        content = urllib2.urlopen(url).read()
-        content = json.loads(content)
-        return content.keys(), content.values()
+        return code
+
+        # url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
+        #             APPID=APPID, SECRET=APPSECRET, CODE=code)
+        # content = urllib2.urlopen(url).read()
+        # content = json.loads(content)
+
         # access_token = content.get('access_token', '')
         # openid = content.get('openid')
         # url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
