@@ -51,11 +51,12 @@ def auth():
                     APPID=APPID, SECRET=APPSECRET, CODE=code)
         content = urllib2.urlopen(url).read()
         content = json.loads(content)
-        access_token = content['access_token']
-        openid = content['openid']
-        url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
-        userinfo = json.loads(urllib2.urlopen(url2).read())
-        return userinfo.get('nickname', ''), userinfo.get('city', ''), userinfo.get('province', '')
+        return content.keys(), content.values()
+        # access_token = content.get('access_token', '')
+        # openid = content.get('openid')
+        # url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
+        # userinfo = json.loads(urllib2.urlopen(url2).read())
+        # return userinfo.get('nickname', ''), userinfo.get('city', ''), userinfo.get('province', '')
 
 
 
