@@ -48,17 +48,18 @@ def auth():
         code = request.args.get('code', '')
 
 
-        url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
-                    APPID=APPID, SECRET=APPSECRET, CODE=code)
-        _content = urllib2.urlopen(url).read()
+        # url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
+        #             APPID=APPID, SECRET=APPSECRET, CODE=code)
+        # _content = urllib2.urlopen(url).read()
 
-        content = json.loads(_content)
-        access_token = content.get('access_token', '')
-        openid = content.get('openid', '')
+        # content = json.loads(_content)
+        # access_token = content.get('access_token', '')
+        # openid = content.get('openid', '')
 
-        url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
-        userinfo = json.loads(urllib2.urlopen(url2).read())
-        return userinfo.get('nickname', '')+'\n' + userinfo.get('city', '')
+        # url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
+        # userinfo = json.loads(urllib2.urlopen(url2).read())
+        userinfo = get_userinfo(code)
+        return userinfo.get('nickname', '')+'\nhaha' + userinfo.get('city', '')
 
 
 
