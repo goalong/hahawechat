@@ -18,7 +18,8 @@ APPID = 'wx25fa28a3f4439fe2'
 APPSECRET = '1443a06f8c87f0f7889cc898d516f588'
 SCOPE = 'snsapi_userinfo'
 REDIRECT_URI = 'http://hahawechat.applinzi.com/auth'
-URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid={APPID}&redirect_uri={REDIRECT_URI}&response_type=code&scope={SCOPE}&state=STATE#wechat_redirect'.format(
+URL = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid={APPID} \
+            &redirect_uri={REDIRECT_URI}&response_type=code&scope={SCOPE}&state=STATE#wechat_redirect'.format(
             APPID=APPID, REDIRECT_URI=REDIRECT_URI, SCOPE=SCOPE)
 
 
@@ -47,8 +48,8 @@ class Wechat:
             s = l[0] + l[1] + l[2]
             if hashlib.sha1(s).hexdigest() == signature:
                 return echostr
-        # pdb.set_trace()
-        return data
+
+        return '验证未通过'
 
     def POST(self):        
         str_xml = web.data() #获得post来的数据
@@ -57,7 +58,8 @@ class Wechat:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        return self.render.reply_text(fromUser,toUser,int(time.time()),u'我知道你说的是{content}, 但我还不确定回复你什么呢。Not Sure Yet.'.format(content=content))
+        return self.render.reply_text(fromUser,toUser,int(time.time()),
+            u'我知道你说的是{content}, 但我还不确定回复你什么呢。Not Sure Yet.'.format(content=content))
 
 class WechatAuth():
     def GET(self):
@@ -66,17 +68,20 @@ class WechatAuth():
         pass
 class Auth():
     def GET(self):
-        data = web.input()
-        code = data.code
-        url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
-                APPID=APPID, SECRET=APPSECRET, CODE=code)
-        content = urllib2.urlopen(url).read()
-        content = json.loads(content)
-        access_token = content['access_token']
-        openid = content['openid']
-        url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
-        userinfo = json.loads(urllib2.urlopen(url2).read())
-        return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'], userinfo['province'])
+        try:
+            data = web.input()
+            code = data.code
+            url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
+                    APPID=APPID, SECRET=APPSECRET, CODE=code)
+            content = urllib2.urlopen(url).read()
+            content = json.loads(content)
+            access_token = content['access_token']
+            openid = content['openid']
+            url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
+            userinfo = json.loads(urllib2.urlopen(url2).read())
+            return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'], userinfo['province'])
+        except Exception as e:
+            return e
     def POST(self):
         pass
 
