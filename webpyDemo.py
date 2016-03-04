@@ -83,6 +83,6 @@ def get_userinfo(code):
     return userinfo
 
 
-app = web.application(urls, globals())
+app = web.application(urls, globals()).wsgifunc()
 app.debug=True
 # app.run()
