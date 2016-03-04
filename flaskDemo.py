@@ -31,7 +31,7 @@ def wechat_verify():
             return echostr
         return u'验证失败'
     else:
-        xml_recv = ET.fromstring(request.data)    #XML数据存储在request.data中
+        xml_recv = ET.fromstring(request.params)    #XML数据存储在request.data中
         ToUserName = xml_recv.find("ToUserName").text
         FromUserName = xml_recv.find("FromUserName").text
         Content = xml_recv.find("Content").text
