@@ -48,9 +48,10 @@ def auth():
         code = request.args.get('code', '')
         return code
 
-        # url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
-        #             APPID=APPID, SECRET=APPSECRET, CODE=code)
-        # content = urllib2.urlopen(url).read()
+        url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
+                    APPID=APPID, SECRET=APPSECRET, CODE=code)
+        content = urllib2.urlopen(url).read()
+        return content
         # content = json.loads(content)
 
         # access_token = content.get('access_token', '')
