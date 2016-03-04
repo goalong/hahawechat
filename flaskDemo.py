@@ -53,7 +53,7 @@ def auth():
         _content = urllib2.urlopen(url).read()
 
         content = json.loads(_content)
-        return content.get('openid', '')
+        return content.get('openid', ''), content.get('access_token', '')
 
 
         # access_token = content.get('access_token', '')
