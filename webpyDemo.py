@@ -54,8 +54,6 @@ class Auth():
             return render.auth(userinfo['nickname'], userinfo['city'], userinfo['country'], userinfo['province'])
         except Exception as e:
             return e
-    def POST(self):
-        pass
 
 def get_userinfo(code):
     url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
@@ -63,9 +61,12 @@ def get_userinfo(code):
     content = urllib2.urlopen(url).read()
     content = json.loads(content)
     access_token = content.get('access_token', '')
+    refresh_token = content.get('refresh_token', '')
     openid = content.get('openid', '')
-    url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
-    userinfo = json.loads(urllib2.urlopen(url2).read())
+    refresh_url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid={APPID}&grant_type=refresh_token&refresh_token={REFRESH_TOKEN}'.format(APPID=APPID, REFRESH_TOKEN=refresh_token)
+    refresh_access_token = json.loads(urllib2.urlopen(refresh_url).read()).get('access_token', '')
+    url3 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=refresh_access_token, OPENID=openid)
+    userinfo = json.loads(urllib2.urlopen(url3).read())
     return userinfo
 
 
