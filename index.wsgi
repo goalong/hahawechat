@@ -11,9 +11,7 @@ urls = (
 '/auth', 'Auth'
 )
  
-app_root = os.path.dirname(__file__)
-templates_root = os.path.join(app_root, 'templates')
-render = web.template.render(templates_root)
+render = web.template.render('templates')
  
 app = web.application(urls, globals()).wsgifunc()  
 app.debug = True      
