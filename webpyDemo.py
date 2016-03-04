@@ -13,7 +13,7 @@ import pdb
 
 urls = (
     '/wechat', 'Wechat',
-    '/auth', 'AskAuth'
+    '/auth', 'Auth'
     )
 render = web.template.render('templates')
 
