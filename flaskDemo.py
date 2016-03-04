@@ -54,7 +54,8 @@ def auth():
 
         content = json.loads(_content)
         access_token = content.get('access_token', '')
-        return access_token
+        openid = content.get('openid', '')
+        return access_token+'\n' + openid
 
 
         # access_token = content.get('access_token', '')
