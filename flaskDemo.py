@@ -43,9 +43,9 @@ def wechat_verify():
 # 网页授权
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
-    data = request.args
-    code = data.get('code', '')
-    return data, code
+    # data = request.args
+    # code = data.get('code', '')
+    return u'哈哈'
     # url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
     #         APPID=APPID, SECRET=APPSECRET, CODE=code)
     # content = urllib2.urlopen(url).read()
