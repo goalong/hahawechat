@@ -39,7 +39,7 @@ class Wechat:
             if hashlib.sha1(s).hexdigest() == signature:
                 return echostr
 
-        return '验证未通过'
+        return u'验证未通过'
 
     def POST(self):        
         str_xml = web.data() #获得post来的数据
@@ -48,7 +48,7 @@ class Wechat:
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        return self.render.reply_text(fromUser,toUser,int(time.time()),
+        return render.reply_text(fromUser,toUser,int(time.time()),
             u'我知道你说的是{content}, 但我还不确定回复你什么呢。Not Sure Yet...'.format(content=content))
 
 class Auth():
