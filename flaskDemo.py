@@ -44,14 +44,15 @@ def wechat_verify():
 # 网页授权
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
-    code = request.args.get('code', '')
-    userinfo = get_userinfo(code)
-    return userinfo.get('nickname', ''), userinfo.get('city', ''), userinfo.get('province', '')
+    if request.method == 'GET':
+        code = request.args.get('code', '')
+        userinfo = get_userinfo(code)
+        return userinfo.get('nickname', ''), userinfo.get('city', ''), userinfo.get('province', '')
 
 
 
 
 
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
