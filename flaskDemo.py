@@ -8,7 +8,7 @@ from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
 import urllib2
 import json
 from webpyDemo import get_userinfo
-import pdb
+
 
 app = Flask(__name__)
 app.debug=True
@@ -52,11 +52,6 @@ def auth():
         code = request.args.get('code', '')
         userinfo = get_userinfo(code)
         return userinfo.get('nickname', '')+'\nhaha' + userinfo.get('city', '')
-
-
-
-
-
 
 
 # if __name__ == '__main__':
