@@ -12,6 +12,10 @@ import pdb
 
 app = Flask(__name__)
 app.debug=True
+@app.route('/')
+def index():
+    return 'Weclome'
+
 # 服务器验证
 @app.route('/wechat', methods=['GET', 'POST'])
 def wechat_verify():
