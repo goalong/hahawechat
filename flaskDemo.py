@@ -58,7 +58,7 @@ def auth():
 
         url2 = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN'.format(ACCESS_TOKEN=access_token, OPENID=openid)
         userinfo = json.loads(urllib2.urlopen(url2).read())
-        return userinfo.get('nickname', ''), userinfo.get('city', '')
+        return userinfo.get('nickname', '')+'\n' + userinfo.get('city', '')
 
 
 
