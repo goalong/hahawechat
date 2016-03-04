@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
 import urllib2
 import json
+from webpyDemo import get_userinfo
 import pdb
 
 app = Flask(__name__)
@@ -43,9 +44,9 @@ def wechat_verify():
 # 网页授权
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
-
     code = request.args.get('code', '')
-    return code
+    userinfo = get_userinfo(code)
+    return userinfo['nickname'], userinfo['city'], userinfo['province']
     # url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
     #         APPID=APPID, SECRET=APPSECRET, CODE=code)
     # content = urllib2.urlopen(url).read()
