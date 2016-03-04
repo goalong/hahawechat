@@ -84,3 +84,4 @@ def get_userinfo(code):
 
 
 app = web.application(urls, globals())
+app.debug=True
