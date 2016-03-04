@@ -6,7 +6,7 @@ import hashlib
 import xml.etree.ElementTree as ET
 from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
 import urllib2
-import simplejson
+import json
 from webpyDemo import get_userinfo
 import pdb
 
@@ -52,7 +52,7 @@ def auth():
                     APPID=APPID, SECRET=APPSECRET, CODE=code)
         _content = urllib2.urlopen(url).read()
 
-        content = simplejson.loads(_content)
+        content = json.loads(_content)
         return content.get('openid', '')
 
 
