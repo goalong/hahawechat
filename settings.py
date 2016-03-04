@@ -1,3 +1,4 @@
+# encoding: utf-8
 '''
 项目的设置，包括appid, appsecret, scope, redirect_uri等
 '''
