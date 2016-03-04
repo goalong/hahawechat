@@ -1,18 +1,8 @@
 
-import os
- 
 import sae
 import web
  
-from wechat import Wechat, Auth
+from wechat import Wechat, Auth, app
  
-urls = (
-'/wechat','Wechat',
-'/auth', 'Auth'
-)
- 
-render = web.template.render('templates')
- 
-app = web.application(urls, globals()).wsgifunc()  
-app.debug = True      
+app = app.wsgifunc()       
 application = sae.create_wsgi_app(app)

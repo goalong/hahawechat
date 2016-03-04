@@ -38,8 +38,7 @@ class Wechat:
         timestamp=data.get('timestamp')
         nonce=data.get('nonce')
         echostr=data.get('echostr')
-
-        token="test"
+        token="test"    
 
         if len(data) >= 2 and signature and timestamp and nonce:
             
@@ -61,11 +60,6 @@ class Wechat:
         return self.render.reply_text(fromUser,toUser,int(time.time()),
             u'我知道你说的是{content}, 但我还不确定回复你什么呢。Not Sure Yet.'.format(content=content))
 
-class WechatAuth():
-    def GET(self):
-        pass
-    def POST(self):
-        pass
 class Auth():
     def GET(self):
         try:
@@ -85,7 +79,4 @@ class Auth():
     def POST(self):
         pass
 
-
-if __name__ == "__main__":
-    app = web.application(urls, globals())
-    app.run()
+app = web.application(urls, globals())
