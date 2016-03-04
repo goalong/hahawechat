@@ -46,7 +46,7 @@ def wechat_verify():
 def auth():
     if request.method == 'GET':
         code = request.args.get('code', '')
-        return code
+
 
         url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={APPID}&secret={SECRET}&code={CODE}&grant_type=authorization_code'.format(
                     APPID=APPID, SECRET=APPSECRET, CODE=code)
