@@ -55,7 +55,7 @@ def auth():
         userinfo = get_userinfo(code)
         return render_template("welcome.html",
                     unionid=userinfo.get('unionid', u'无'),
-                    sex = userinfo.get('sex', u'未知')
+                    sex = userinfo.get('sex', u'未知'),
                     userinfo = userinfo)
 
 
