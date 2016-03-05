@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 import time
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, render_template
 import hashlib
 import xml.etree.ElementTree as ET
 from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
@@ -49,9 +49,10 @@ def wechat_verify():
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'GET':
-        code = request.args.get('code', '')
-        userinfo = get_userinfo(code)
-        return userinfo.get('nickname', '')+'\nhaha' + userinfo.get('city', '')
+        # code = request.args.get('code', '')
+        # userinfo = get_userinfo(code)
+        # return userinfo.get('nickname', '')+'\nhaha' + userinfo.get('city', '')
+        return render_template("welcome.html", hello = 'hey you.')
 
 
 # if __name__ == '__main__':
