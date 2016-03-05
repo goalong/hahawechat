@@ -1,16 +1,21 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Auth</title>
 </head>
 <body>
 
-<h1>Weclome, {{userinfo.nickname}}</h1>
-<h2>这些是关于您我们知道的：</h2>
-<h3>国家：{{userinfo.country}}</h3>
-<h3>省份：{{userinfo.province}}</h3>
-<h3>城市：{{userinfo.city}}</h3>
+<h1>Weclome, {{ userinfo.nickname }}</h1>
+<h2>您的基本信息如下：</h2>
+<h3>国家：{{ userinfo.country }}</h3>
+<h3>省份：{{ userinfo.province }}</h3>
+<h3>城市：{{ userinfo.city }}</h3>
+<h3>性别：{{ sex }}</h3>
+<h3>unionid：{{ unionid }}</h3>
+<h3>openid：{{ userinfo.openid }}</h3>
+
 <hr>
-Have a good good day.
+Have a good day.
 
 </body>
 </html>

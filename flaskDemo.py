@@ -49,10 +49,20 @@ def wechat_verify():
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if request.method == 'GET':
-        # code = request.args.get('code', '')
-        # userinfo = get_userinfo(code)
-        # return userinfo.get('nickname', '')+'\nhaha' + userinfo.get('city', '')
-        return render_template("welcome.html", hello = 'hey you.')
+        code = request.args.get('code', '')
+        userinfo = get_userinfo(code)
+
+        # userinfo = {
+        #     'nickname': 'along',
+        #     'province': u'河南',
+        #     'city': u'北京',
+        #     'test': u'哈哈，这是test'
+
+        # }
+
+        return render_template("welcome.html",
+                    unionid=userinfo.get('unionid', u'无'),
+                    userinfo = userinfo)
 
 
 # if __name__ == '__main__':

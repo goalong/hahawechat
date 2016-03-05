@@ -4,6 +4,4 @@ libraries:
 - name: lxml
   version: "2.3.4"
 
-handlers:
-- url: /auth
-  static_path: templates/welcome.html
+
