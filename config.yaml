@@ -6,4 +6,4 @@ libraries:
 
 handlers:
 - url: /auth
-  static_path: welcome.html
+  static_path: templates/welcome.html
