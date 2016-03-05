@@ -8,6 +8,7 @@ from settings import APPID, APPSECRET, SCOPE, REDIRECT_URI, URL
 import urllib2
 import json
 from webpyDemo import get_userinfo
+import random
 
 
 app = Flask(__name__)
@@ -41,8 +42,9 @@ def wechat_verify():
                     <FromUserName><![CDATA[%s]]></FromUserName>
                     <CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType>
                     <Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>'''
+        reply_list = [u'呵呵', u'干嘛', u'去洗澡。。。', u'你说什么，大声点', u'怎么回复呢？？？'］
         response = make_response(reply % (FromUserName, ToUserName,
-                                          str(int(time.time())), Content))
+                                          str(int(time.time())), random.choice(reply_list)))
         response.content_type = 'application/xml'
         return response
 # 网页授权
@@ -51,17 +53,9 @@ def auth():
     if request.method == 'GET':
         code = request.args.get('code', '')
         userinfo = get_userinfo(code)
-
-        # userinfo = {
-        #     'nickname': 'along',
-        #     'province': u'河南',
-        #     'city': u'北京',
-        #     'test': u'哈哈，这是test'
-
-        # }
-
         return render_template("welcome.html",
                     unionid=userinfo.get('unionid', u'无'),
+                    sex = userinfo.get('sex', u'未知')
                     userinfo = userinfo)
 
 
