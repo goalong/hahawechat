@@ -42,9 +42,9 @@ def wechat_verify():
                     <FromUserName><![CDATA[%s]]></FromUserName>
                     <CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType>
                     <Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>'''
-        # reply_list = [u'呵呵', u'干嘛', u'去洗澡。。。', u'你说什么，大声点']
+        reply_list = [u'呵呵', u'干嘛', u'去洗澡。。。', u'你说什么，大声点']
         response = make_response(reply % (FromUserName, ToUserName,
-                                          str(int(time.time())), Content))
+                                          str(int(time.time())), random.choice(reply_list)))
         response.content_type = 'application/xml'
         return response
 # 网页授权
