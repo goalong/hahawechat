@@ -44,7 +44,7 @@ def wechat_verify():
                     <Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>'''
         reply_list = [u'呵呵', u'干嘛', u'去洗澡。。。', u'你说什么，大声点']
         response = make_response(reply % (FromUserName, ToUserName,
-                                          str(int(time.time())), random.choice(reply_list)))
+                                          str(int(time.time())), Content)
         response.content_type = 'application/xml'
         return response
 # 网页授权
