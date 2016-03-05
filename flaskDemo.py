@@ -38,7 +38,7 @@ def wechat_verify():
         ToUserName = xml_recv.find("ToUserName").text
         FromUserName = xml_recv.find("FromUserName").text
         Content = xml_recv.find("Content").text
-        reply = '''<xml><ToUserName><![CDATA[%s]]></ToUserName>
+        reply = u'''<xml><ToUserName><![CDATA[%s]]></ToUserName>
                     <FromUserName><![CDATA[%s]]></FromUserName>
                     <CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType>
                     <Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>'''
